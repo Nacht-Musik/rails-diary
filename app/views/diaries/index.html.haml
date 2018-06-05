@@ -15,8 +15,8 @@
       %tr
         %td= diary.id
         %td= link_to diary.title, diary
-        %td= "カテゴリ(ダミー)"
-        %td= "ユーザー名(ダミー)"
+        %td= @categories.find(diary.category_id).name
+        %td= @users.find(diary.user_id).name
         %td= diary.updated_at
         %td.btn-group{"aria-label" => "操作ボタン", :role => "group"}
           = link_to '編集', edit_diary_path(diary), class: 'btn btn-outline-success'

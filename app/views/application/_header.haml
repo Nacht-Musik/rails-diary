@@ -1,23 +1,26 @@
 - path = request.path
 %header#app--header
   %nav.navbar.navbar-expand-md.navbar-dark.bg-secondary
-    .navbar-brand
-      = link_to 'Diary App', '/', class: "text-light"
-    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-      -# 画面小時のアイコン
-      %span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
-      %ul.navbar-nav.mr-auto
-        %li.nav-item.active
-          = link_to 'Signup', '#', class: "nav-link"
-        %li.nav-item.active
-          = link_to 'Signin', '#', class: "nav-link"
-        %li.nav-item.active
-          = link_to 'Logout', '#', class: "nav-link"
-        -# %li.nav-item.active
-        -#   = "Login User Name"
+    .container
+      .navbar-brand
+        = link_to 'Diary App', '/', class: "text-light"
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+        -# 画面小時のアイコン
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          - if !user_signed_in?
+            %li.nav-iteme
+              = link_to 'Signup', new_user_registration_path, class: "nav-link"
+            %li.nav-iteme
+              = link_to 'Signin', new_user_session_path, class: "nav-link"
+          - if user_signed_in?
+            %li.nav-item
+              = link_to 'Logout', destroy_user_session_path, class: "nav-link"
+            %li.nav-item
+              = current_user.name
 
-      -# 検索フォーム
-      %form.form-inline.my-2.my-lg-0
-        %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Title or User", :type => "search"}/
-        %button.btn.btn-info.my-2.my-sm-0{:type => "submit"}  検索
+        -# 検索フォーム
+        %form.form-inline.my-2.my-lg-0
+          %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Title or User", :type => "search"}/
+          %button.btn.btn-info.my-2.my-sm-0{:type => "submit"} Search
