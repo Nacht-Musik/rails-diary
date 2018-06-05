@@ -1,3 +1,21 @@
-%h2 Toppages#index
-%h3
-  = link_to '日記リスト', diaries_path
+%h2.text-center Toppages#index
+= link_to '日記リスト', diaries_path, class: "btn btn-outline-dark"
+%br
+-# = link_to 'button', '#', class: "btn btn-outline-dark", data: {toggle: "button"}, aria: {pressed:"false"}
+
+.card.col-sm-10.col-md-5.col-lg-4
+  .card-header
+    Title
+  .card-body
+    %h5.card-title Special title treatment
+    %p.card-text With supporting text below as a natural lead-in to additional content.
+    = link_to 'button', '#', class: "btn btn-outline-primary"
+
+.card.col-sm-10.col-md-5.col-lg-4
+  .card-header
+    Title
+  .card-body
+    %h5.card-title Special title treatment
+    %br
+    %p.card-text With supporting text below as a natural lead-in to additional content.
+    = link_to 'button', '#', class: "btn btn-outline-dark"

@@ -1,6 +1,12 @@
 - path = request.path
 %header#app--header
-  .title
-    %h1.site-title
-      Diary App
-  %hr
+  %nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+    .navbar-brand
+      = link_to 'Diary App', '/'
+    %ul.navbar-nav.ml-auto
+      %li.nav-item
+        = link_to 'Signup', '#'
+      %li.nav-item
+        = link_to 'Signin', '#'
+      %li.nav-item
+        = link_to 'Logout', '#'

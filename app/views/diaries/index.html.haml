@@ -1,22 +1,25 @@
 %p#notice= notice
-%h1 Diaries
-%table
-  %thead
+%h2 日記一覧表示
+%table.table.table-bordered.table-hover
+  %thead.thead-light
     %tr
-      %th ID
-      %th タイトル
-      %th 登録日時
-      %th 更新日時
-      %th{:colspan => "3"}
+      %th{scope: "col"} ID
+      %th{scope: "col"} タイトル
+      %th{scope: "col"} カテゴリ
+      %th{scope: "col"} ユーザ
+      %th{scope: "col"} 更新日時
+      %th{scope: "col"}
+
   %tbody
     - @diaries.each do |diary|
       %tr
         %td= diary.id
         %td= link_to diary.title, diary
-        %td= diary.created_at
+        %td= "カテゴリ(ダミー)"
+        %td= "ユーザー名(ダミー)"
         %td= diary.updated_at
-        %td= link_to 'Show', diary
-        %td= link_to 'Edit', edit_diary_path(diary)
-        %td= link_to 'Destroy', diary, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.btn-group{"aria-label" => "操作ボタン", :role => "group"}
+          = link_to '編集', edit_diary_path(diary), class: 'btn btn-outline-success'
+          = link_to '削除', diary, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' }
 %br/
-= link_to '日記を新規作成', new_diary_path
+= link_to '日記を新規作成', new_diary_path, class: 'btn btn-secondary'
