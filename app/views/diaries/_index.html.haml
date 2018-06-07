@@ -1,0 +1,12 @@
+- diaries.each do |diary|
+  %tr
+    %td= diary.id
+    %td= link_to diary.title, diary
+    %td= categories.find(diary.category_id).name
+    %td= users.find(diary.user_id).name
+    %td= diary.updated_at
+    %td
+      .btn-group{"aria-label" => "操作ボタン", :role => "group"}
+        = link_to '編集', edit_diary_path(diary), remote: true, class: 'btn btn-outline-success'
+        = link_to '削除', diary, method: :delete, class: 'btn btn-outline-danger',
+          data: { confirm: 'Are you sure?' }

@@ -1,21 +1,21 @@
-= form_with(model: diary, local: true) do |form|
-  - if diary.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(diary.errors.count, "error")
-        prohibited this diary from being saved:
-      %ul
-        - diary.errors.full_messages.each do |message|
-          %li= message
-  .field.form-group
-    = form.label :title
-    = form.text_field :title, id: :diary_title, class: 'form-control'
-  .field.form-group
-    = form.label :body
-    = form.text_area :body, id: :diary_body, class: 'form-control'
-  .field.form-group
-    = form.label :category_id
-    = form.collection_select :category_id, categories,
-      :id, :name, {prompt: ""}, {class: 'custom-select'}
-  .actions
-    = form.submit
+.modal-dialog.modal-dialog-centered
+  .modal-content
+    .modal-header
+      %h3
+        = header_str
+    = form_for diary, remote: true, html: { style: "display:inline;" } do |f|
+      .modal-body
+        %ul.errors
+        .form-group
+          = f.label 'タイトル', class:"control-label"
+          = f.text_field :title, class: "form-control"
+        .form-group
+          = f.label '本文', class: "control-label"
+          = f.text_field :body, class: "form-control"
+        .form-group
+          = f.label 'カテゴリ', class: "control-label"
+          = f.collection_select :category_id, categories, :id, :name, {prompt: ""},
+          {class: 'custom-select'}
+      .modal-footer
+        = f.submit class: "btn btn-primary"
+        = link_to "Cancel", "#", class: "btn btn-outline-danger", data: {dismiss: "modal"}

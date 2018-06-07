@@ -1,0 +1,16 @@
+.col-12.col-sm-6.col-lg-4.col-xl-3
+  .card.border-dark
+    .card-body.bg-light
+      %h5.card-title
+        = link_to diary.title, edit_diary_path(diary)
+      %hr
+      %h6.card-subtitle
+        カテゴリ:
+        = categories.find(diary.category_id).name
+      %hr
+      %span
+        - if current_user.id == diary.user_id
+          .btn-group.center-block{"aria-label" => "操作ボタン", :role => "group"}
+            = link_to '編集', edit_diary_path(diary), remote: true, class: 'btn btn-outline-success'
+            = link_to '削除', diary, method: :delete, class: 'btn btn-outline-danger',
+              data: { confirm: 'Are you sure?' }

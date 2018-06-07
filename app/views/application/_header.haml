@@ -1,26 +1,28 @@
 - path = request.path
-%header#app--header
+%header#app--header.navbar-dark.bg-secondary
   %nav.navbar.navbar-expand-md.navbar-dark.bg-secondary
     .container
       .navbar-brand
-        = link_to 'Diary App', '/', class: "text-light"
+        - if user_signed_in?
+          = link_to current_user.name + '\'s Diary', '/', class: "text-light"
+        - else
+          = link_to 'Diary App', '/', class: "text-light"
       %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
         -# 画面小時のアイコン
         %span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
-          - if !user_signed_in?
-            %li.nav-iteme
-              = link_to 'Signup', new_user_registration_path, class: "nav-link"
-            %li.nav-iteme
-              = link_to 'Signin', new_user_session_path, class: "nav-link"
           - if user_signed_in?
             %li.nav-item
-              = link_to 'Logout', destroy_user_session_path, class: "nav-link"
+              = link_to 'New Diary', new_diary_path, remote:true, class: "btn btn-secondary nav-link"
             %li.nav-item
-              = current_user.name
-
-        -# 検索フォーム
-        %form.form-inline.my-2.my-lg-0
-          %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Title or User", :type => "search"}/
-          %button.btn.btn-info.my-2.my-sm-0{:type => "submit"} Search
+              = link_to 'All Diary', diaries_path, class: "btn btn-secondary nav-link"
+        %ul.navbar-nav.ml-auto
+          - if user_signed_in?
+            %li.nav-item
+              = link_to 'Logout', destroy_user_session_path, class: "btn btn-secondary nav-link"
+          - else
+            %li.nav-iteme
+              = link_to 'Signup', new_user_registration_path, class: "btn btn-secondary nav-link"
+            %li.nav-iteme
+              = link_to 'Signin', new_user_session_path, class: "btn btn-secondary nav-link"

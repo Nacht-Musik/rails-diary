@@ -1,35 +1,9 @@
-%h2.text-center Toppages#index
-= link_to '日記リスト', diaries_path, class: "btn btn-outline-dark"
-%br
--# = link_to 'button', '#', class: "btn btn-outline-dark", data: {toggle: "button"}, aria: {pressed:"false"}
-
--# .card.col-sm-10.col-md-5.col-lg-4
+- if user_signed_in?
+  %h3 My diary lists
+%hr
 .row
-  .col-sm-12.col-md-6.col-lg-4
-    .card.border-dark
-      .card-body
-        %h5.card-title Special title treatment
-        %hr
-        %p.card-text With supporting text below as a natural lead-in to additional content.
-        = link_to 'button', '#', class: "btn btn-outline-primary"
+  - if @my_diaries
+    - @my_diaries.each do |diary|
+      = render 'diaries/diary_card', diary: diary, categories: @categories
 
-  .col-sm-12.col-md-6.col-lg-4
-    .card.border-dark
-      .card-body.bg-light
-        %h5.card-title Special title treatment
-        %hr
-        %p.card-text With supporting text below as a natural lead-in to additional content.
-        = link_to 'button', '#', class: "btn btn-outline-dark"
-
-  .modal{:role => "dialog", :tabindex => "-1"}
-    .modal-dialog{:role => "document"}
-      .modal-content
-        .modal-header
-          %h5.modal-title Modal title
-          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-            %span{"aria-hidden" => "true"} ×
-        .modal-body
-          %p Modal body text goes here.
-        .modal-footer
-          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
-          %button.btn.btn-primary{:type => "button"} Save changes
+#diary-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}

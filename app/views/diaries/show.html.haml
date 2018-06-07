@@ -14,8 +14,9 @@
 %p
   %strong 更新日時:
   = @diary.updated_at
-= link_to '編集', edit_diary_path(@diary)
-|
-= link_to '削除', @diary, method: :delete, data: { confirm: '本当に削除しますか？' }
-|
-= link_to '一覧に戻る', diaries_path
+
+.btn-group{"aria-label" => "操作ボタン", :role => "group"}
+  = link_to '編集', edit_diary_path(@diary), remote: true, class: 'btn btn-outline-success'
+  = link_to '削除', @diary, method: :delete, class: 'btn btn-outline-danger',
+    data: { confirm: 'Are you sure?' }
+  = link_to '戻る', diaries_path, class: 'btn btn-outline-primary'

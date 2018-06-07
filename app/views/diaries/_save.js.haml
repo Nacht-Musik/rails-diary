@@ -1,0 +1,9 @@
+$("ul.errors").html("")
+- if @diary.errors.any?
+  - @diary.errors.full_messages.each do |message|
+    $("ul.errors").append($("
+    %li>
+    ").html("#{message.html_safe}"))
+- else
+  $(".diary-index").html("#{escape_javascript(render 'index', diaries: @diaries, users: @users, categories: @categories)}")
+  $("#diary-modal").modal("hide")

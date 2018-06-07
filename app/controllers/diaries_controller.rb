@@ -26,32 +26,40 @@ class DiariesController < ApplicationController
   # POST /diaries
   # POST /diaries.json
   def create
-    # @diary = Diary.new(diary_params)
+    # modal用
+    @diaries = Diary.all
     @diary = current_user.diaries.build(diary_params)
+    @diary.save
 
-    respond_to do |format|
-      if @diary.save
-        format.html { redirect_to @diary, notice: 'Diary was successfully created.' }
-        format.json { render :show, status: :created, location: @diary }
-      else
-        format.html { render :new }
-        format.json { render json: @diary.errors, status: :unprocessable_entity }
-      end
-    end
+    ### Original code
+    # @diary = current_user.diaries.build(diary_params)
+    # respond_to do |format|
+    #   if @diary.save
+    #     format.html { redirect_to @diary, notice: 'Diary was successfully created.' }
+    #     format.json { render :show, status: :created, location: @diary }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @diary.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /diaries/1
   # PATCH/PUT /diaries/1.json
   def update
-    respond_to do |format|
-      if @diary.update(diary_params)
-        format.html { redirect_to @diary, notice: 'Diary was successfully updated.' }
-        format.json { render :show, status: :ok, location: @diary }
-      else
-        format.html { render :edit }
-        format.json { render json: @diary.errors, status: :unprocessable_entity }
-      end
-    end
+    #modal用
+    @diaries = Diary.all
+    @diary.update(diary_params)
+    ### Original code
+    # respond_to do |format|
+    #   if @diary.update(diary_params)
+    #     format.html { redirect_to @diary, notice: 'Diary was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @diary }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @diary.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /diaries/1
