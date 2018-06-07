@@ -26,7 +26,8 @@ class DiariesController < ApplicationController
   # POST /diaries
   # POST /diaries.json
   def create
-    @diary = Diary.new(diary_params)
+    # @diary = Diary.new(diary_params)
+    @diary = current_user.diaries.build(diary_params)
 
     respond_to do |format|
       if @diary.save
@@ -79,6 +80,6 @@ class DiariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diary_params
-      params.require(:diary).permit(:title, :body)
+      params.require(:diary).permit(:title, :body, :category_id)
     end
 end
